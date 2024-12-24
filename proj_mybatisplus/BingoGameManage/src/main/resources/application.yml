@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/lzlg?userSSL=false&serverTimeZone=Asia/Shanghai&characterEncoding=UTF-8
+    username: root
+    password: 123456
+
+mybatis-plus:
+  # 指定 mapper 对应的文件地址 (如果有自定义的方法)
+  mapper-locations: classpath:/mapper/**.xml
+  configuration:
+    # 开启驼峰命名规则映射 (DataBase)A_COLUMN <-> (Java)aColumn
+    map-underscore-to-camel-case: true
+    # 控制台打印 SQL 语句
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      # 设置 id 为雪花算法 (单调递增)
+      id-type: assign_id
+      # 设置全局逻辑删除
+      logic-delete-field: deleted
+      # 逻辑已删除
+      logic-delete-value: 1
+      # 逻辑未删除
+      logic-not-delete-value: 0
+
+server:
+  port: 8080
